@@ -32,7 +32,7 @@ and every section updates - you rarely need to touch the components.
 | Hero number strip            | `stats`               |
 | Skills (grouped)             | `skillGroups`         |
 | KubernetesSentinel section   | `flagship`            |
-| YouTube video + chapters     | `video`               |
+| Walkthrough videos           | `videos`              |
 | Other projects               | `projects`            |
 | Jobs / competitions          | `experience`          |
 | Degrees                      | `education`           |
@@ -40,14 +40,17 @@ and every section updates - you rarely need to touch the components.
 
 ### Changing the video
 
-In `content.js`, set `video.id` to the YouTube ID - the part after `youtu.be/`:
+In `content.js`, each entry in `videos` has an `id` field, which is the YouTube ID - the part after `youtu.be/` or `watch?v=`:
 
 ```js
-export const video = {
-  id: "3KmUOtiPlZc",                  // just the ID, nothing else
-  url: "https://youtu.be/3KmUOtiPlZc",
-  ...
-};
+export const videos = [
+  {
+    id: "3KmUOtiPlZc",                // just the ID, nothing else
+    slug: "sentinel",                 // used by #video-sentinel links
+    tab: "KubernetesSentinel",        // label on the switcher button
+    ...
+  },
+];
 ```
 
 The thumbnail is pulled from YouTube automatically, and the player only loads

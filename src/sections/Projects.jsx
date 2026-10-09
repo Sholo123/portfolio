@@ -31,6 +31,19 @@ export default function Projects() {
                 {p.desc}
               </p>
 
+              {p.team && (
+                <p className="mt-3 text-sm leading-relaxed text-slate-500">
+                  {p.team}.
+                </p>
+              )}
+
+              {p.role && (
+                <p className="mt-4 flex items-center gap-2 text-sm">
+                  <span className="text-slate-500">My role:</span>
+                  <span className="text-accent">{p.role}</span>
+                </p>
+              )}
+
               <ul className="mt-5 space-y-2.5">
                 {p.points.map((point) => (
                   <li key={point} className="flex gap-3 text-sm text-slate-400">
@@ -39,6 +52,20 @@ export default function Projects() {
                   </li>
                 ))}
               </ul>
+
+              {p.videoSlug && (
+                <a
+                  href={`#video-${p.videoSlug}`}
+                  className="group/link mt-5 inline-flex items-center gap-2 text-sm font-medium text-accent transition hover:text-accent-soft"
+                >
+                  <Icon name="play" className="h-3.5 w-3.5" />
+                  Watch the demonstration
+                  <Icon
+                    name="arrow"
+                    className="h-3.5 w-3.5 transition group-hover/link:translate-x-1"
+                  />
+                </a>
+              )}
 
               <div className="mt-auto flex flex-wrap gap-2 pt-6">
                 {p.stack.map((s) => (

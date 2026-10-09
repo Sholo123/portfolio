@@ -125,31 +125,60 @@ export const flagship = {
   ],
 };
 
-export const video = {
-  id: "3KmUOtiPlZc",
-  url: "https://youtu.be/3KmUOtiPlZc",
-  title: "KubernetesSentinel: Honours Research Project Walkthrough",
-  description:
-    "A walkthrough of KubernetesSentinel covering how the CIS benchmark scanner works, what the pre-deployment checks catch, and how the RBAC attack path graph is built.",
-  chapters: [
-    "How Kubernetes clusters drift out of compliance",
-    "Scanning a live cluster against 131 CIS controls",
-    "Catching misconfigured manifests before deployment",
-    "Mapping privilege escalation paths from RBAC data",
-    "Remediation, rollback and audit reporting",
-  ],
-};
+export const videos = [
+  {
+    id: "3KmUOtiPlZc",
+    slug: "sentinel",
+    url: "https://youtu.be/3KmUOtiPlZc",
+    tab: "KubernetesSentinel",
+    kicker: "Honours research project",
+    title: "KubernetesSentinel: Honours Research Project Walkthrough",
+    description:
+      "A walkthrough of KubernetesSentinel covering how the CIS benchmark scanner works, what the pre-deployment checks catch, and how the RBAC attack path graph is built.",
+    panelTitle: "Topics covered",
+    panelItems: [
+      "How Kubernetes clusters drift out of compliance",
+      "Scanning a live cluster against 131 CIS controls",
+      "Catching misconfigured manifests before deployment",
+      "Mapping privilege escalation paths from RBAC data",
+      "Remediation, rollback and audit reporting",
+    ],
+  },
+  {
+    id: "NmBKS5FJUcY",
+    slug: "eskom",
+    url: "https://www.youtube.com/watch?v=NmBKS5FJUcY",
+    tab: "Eskom Expo",
+    kicker: "Third-year group project",
+    title: "Eskom Expo Judging System Demonstration",
+    description:
+      "A demonstration of the Eskom Expo Judging System, the platform built to replace the paper-based judging process used for national science expo administration.",
+    panelNote:
+      "A group project with four members. Two worked on the web application, and two of us worked on the backend and the mobile app.",
+    panelTitle: "My contribution",
+    panelItems: [
+      "Marksheet creation on the backend",
+      "Allocating marksheets to judges",
+      "Assigning projects to the correct marksheets",
+      "Work on the React Native mobile app",
+    ],
+  },
+];
 
 export const projects = [
   {
     name: "Eskom Expo Judging System",
     period: "Feb 2025 - Oct 2025",
     kicker: "Full-stack and mobile application",
+    role: "Backend and mobile app",
+    team: "Group project with four members, two on the web application and two on the backend and mobile app",
+    videoSlug: "eskom",
     desc: "A digital judging platform that replaced the paper-based process used for national science expo administration, showcased at ACSSE Project Days, University of Johannesburg.",
     points: [
-      "Built the React Native app judges use to log in, view assigned projects and submit marksheets",
-      "Built the Node.js, Express and SQL backend managing judges, projects, events and marksheets for nearly all participating primary and high schools",
-      "Set up the evaluation and ethics review workflow, which reduced the amount of manual paperwork involved",
+      "Worked mainly on the backend in Node.js, Express and SQL, building the marksheet creation flow",
+      "Implemented the allocation logic that assigns marksheets to judges and matches each project to the correct marksheet",
+      "Contributed to the React Native mobile app judges use to view their assigned projects and submit marks",
+      "Supported the evaluation and ethics review workflow, which reduced the amount of manual paperwork involved",
     ],
     stack: ["React Native", "Node.js", "Express", "SQL"],
   },

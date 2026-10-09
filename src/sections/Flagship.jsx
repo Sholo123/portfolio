@@ -33,7 +33,7 @@ export default function Flagship() {
                 {flagship.period}
               </span>
               <a
-                href="#video"
+                href="#video-sentinel"
                 className="group flex items-center gap-2 rounded-lg border border-accent/40 bg-accent/10 px-4 py-2 text-sm font-medium text-accent transition hover:bg-accent/20"
               >
                 <Icon name="play" className="h-3.5 w-3.5" />

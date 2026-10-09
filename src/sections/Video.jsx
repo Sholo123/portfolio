@@ -1,11 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Section from "../components/Section";
 import Reveal from "../components/Reveal";
 import Icon from "../components/Icon";
-import { video } from "../data/content";
+import { videos } from "../data/content";
 
 export default function Video() {
+  const [active, setActive] = useState(0);
   const [playing, setPlaying] = useState(false);
+  const video = videos[active];
+
+  const selectTab = (i) => {
+    setActive(i);
+    setPlaying(false); // stop the current video when switching
+  };
+
+  // Let other sections deep link to a specific video via #video-<slug>.
+  useEffect(() => {
+    const apply = () => {
+      const match = window.location.hash.match(/^#video-(.+)$/);
+      if (!match) return;
+      const i = videos.findIndex((v) => v.slug === match[1]);
+      if (i >= 0) {
+        setActive(i);
+        setPlaying(false);
+      }
+    };
+    apply();
+    window.addEventListener("hashchange", apply);
+    return () => window.removeEventListener("hashchange", apply);
+  }, []);
 
   // Fall back to the standard-quality thumbnail if there's no HD one.
   const handleThumbError = (e) => {
@@ -18,12 +41,41 @@ export default function Video() {
   return (
     <Section
       id="video"
-      eyebrow="Demonstration"
-      title="Project walkthrough"
+      eyebrow="Demonstrations"
+      title="Project walkthroughs"
       subtitle={video.description}
     >
+      {/* deep link targets for #video-<slug> */}
+      {videos.map((v) => (
+        <span
+          key={v.slug}
+          id={`video-${v.slug}`}
+          className="block h-0 scroll-mt-32"
+          aria-hidden="true"
+        />
+      ))}
+
+      {/* video switcher */}
+      <Reveal className="mb-8 flex flex-wrap justify-center gap-2">
+        {videos.map((v, i) => (
+          <button
+            key={v.id}
+            type="button"
+            onClick={() => selectTab(i)}
+            aria-pressed={i === active}
+            className={`rounded-xl border px-5 py-2.5 text-sm font-medium transition ${
+              i === active
+                ? "border-accent/50 bg-accent/15 text-accent"
+                : "border-white/10 text-slate-400 hover:border-white/20 hover:text-white"
+            }`}
+          >
+            {v.tab}
+          </button>
+        ))}
+      </Reveal>
+
       <div className="grid gap-8 lg:grid-cols-[1.6fr_1fr]">
-        <Reveal>
+        <Reveal key={`player-${video.id}`}>
           <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-ink-900 shadow-2xl shadow-accent/5">
             <div className="relative aspect-video">
               {playing ? (
@@ -56,7 +108,7 @@ export default function Video() {
                   </span>
 
                   <span className="absolute inset-x-0 bottom-0 p-5 text-left sm:p-6">
-                    <span className="eyebrow">Honours research project</span>
+                    <span className="eyebrow">{video.kicker}</span>
                     <span className="mt-2 block text-lg font-semibold text-white sm:text-xl">
                       {video.title}
                     </span>
@@ -67,11 +119,17 @@ export default function Video() {
           </div>
         </Reveal>
 
-        <Reveal delay={0.15}>
+        <Reveal key={`panel-${video.id}`} delay={0.1}>
           <div className="card h-full p-6">
-            <p className="eyebrow mb-4">Topics covered</p>
+            {video.panelNote && (
+              <p className="mb-5 border-b border-white/10 pb-5 text-sm leading-relaxed text-slate-400">
+                {video.panelNote}
+              </p>
+            )}
+
+            <p className="eyebrow mb-4">{video.panelTitle}</p>
             <ol className="space-y-3">
-              {video.chapters.map((c, i) => (
+              {video.panelItems.map((c, i) => (
                 <li key={c} className="flex gap-3 text-sm text-slate-400">
                   <span className="font-mono text-xs text-accent">
                     {String(i + 1).padStart(2, "0")}

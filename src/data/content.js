@@ -9,8 +9,6 @@ export const profile = {
   university: "University of Johannesburg",
   location: "Johannesburg, South Africa",
   email: "rearamatshego277@gmail.com",
-  phone: "+27 79 656 1812",
-  phoneHref: "+27796561812",
   github: "https://github.com/Sholo123",
   githubHandle: "github.com/Sholo123",
   linkedin: "https://linkedin.com/in/sholo-ramatshego",

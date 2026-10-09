@@ -9,12 +9,7 @@ const channels = [
     label: "Email",
     value: profile.email,
     href: `mailto:${profile.email}`,
-  },
-  {
-    icon: "phone",
-    label: "Phone",
-    value: profile.phone,
-    href: `tel:${profile.phoneHref}`,
+    wide: true,
   },
   {
     icon: "linkedin",
@@ -48,7 +43,11 @@ export default function Contact() {
 
       <div className="relative mx-auto mt-12 grid max-w-3xl gap-4 sm:grid-cols-2">
         {channels.map((c, i) => (
-          <Reveal key={c.label} delay={i * 0.07}>
+          <Reveal
+            key={c.label}
+            delay={i * 0.07}
+            className={c.wide ? "sm:col-span-2" : ""}
+          >
             <a
               href={c.href}
               target={c.href.startsWith("http") ? "_blank" : undefined}
